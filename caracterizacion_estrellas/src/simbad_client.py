@@ -21,9 +21,10 @@ def configure_simbad():
     return custom_simbad
 
 def query_simbad(star_name):
-    """Consulta optimizada para SIMBAD"""
+    """Consulta para SIMBAD tipo query_object"""
     warnings.simplefilter('ignore', AstropyWarning)
     
+    # Control de errores: hay algo ahí?
     try:
         simbad = configure_simbad()
         result = simbad.query_object(star_name)
@@ -32,7 +33,8 @@ def query_simbad(star_name):
             print(f"No se encontraron resultados para {star_name}")
             return None
         
-        # Extracción robusta de datos
+        # Extracción de datos
+        # OJO: fluxB y fluxV están obsoletos en favor de B y V respectivamente
         data = {
             'name': star_name,
             'radial_velocity_km_s': _safe_extract(result, 'rvz_radvel'),
@@ -42,12 +44,7 @@ def query_simbad(star_name):
         }
         
         # Depuración: Mostrar los datos crudos obtenidos
-        # print("\nDatos crudos de SIMBAD:")
-        # print(result['main_id'][0])         # Nombre del objeto
-        # print(result['plx_value'][0])       # Paralaje en mas
-        # print(result['rvz_radvel'][0])      # Velocidad radial en km/s
-        # print(result['B'][0])          # Magnitud B
-        # print(result['V'][0])          # Magnitud V
+        print("\nDatos crudos de SIMBAD:")
         print(data['name'])
         print(data['radial_velocity_km_s'])
         print(data['parallax_arcsec'])
@@ -60,7 +57,7 @@ def query_simbad(star_name):
         return None
 
 def _safe_extract(result, field):
-    """Extrae un campo de manera segura"""
+    """Extrae un campo"""
     if field not in result.colnames:
         return None
     value = result[field][0]
