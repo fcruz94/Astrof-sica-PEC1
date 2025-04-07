@@ -62,24 +62,7 @@ class ResultsWindow:
         
         self.setup_ui()
     
-    # def setup_ui(self):
-    #     notebook = ttk.Notebook(self.root)
-    #     notebook.pack(fill=tk.BOTH, expand=True)
-        
-    #     # Pestaña de datos de entrada (actualizada)
-    #     input_frame = ttk.Frame(notebook)
-    #     self.create_table(input_frame, create_input_table(self.stars_data))
-    #     notebook.add(input_frame, text="Datos de Entrada")
-        
-    #     # Pestaña de resultados
-    #     results_frame = ttk.Frame(notebook)
-    #     self.create_table(results_frame, create_results_table(self.calculated_results))
-    #     notebook.add(results_frame, text="Resultados Calculados")
-        
-    #     # Pestaña del diagrama HR
-    #     hr_frame = ttk.Frame(notebook)
-    #     self.create_hr_diagram(hr_frame)
-    #     notebook.add(hr_frame, text="Diagrama HR")
+
     def setup_ui(self):
         notebook = ttk.Notebook(self.root)
         notebook.pack(fill=tk.BOTH, expand=True)
@@ -120,6 +103,7 @@ class ResultsWindow:
         ttk.Button(export_frame, text="Exportar a LaTeX", 
                   command=lambda: self.export_tables(input_table, results_table, 'latex'),
                   style='Export.TButton').pack(side=tk.LEFT, padx=5)
+    
     def create_table(self, parent, dataframe):
         """Crea una tabla a partir de un DataFrame"""
         tree = ttk.Treeview(parent)
@@ -169,6 +153,7 @@ class ResultsWindow:
     
     def export_tables(self, input_table, results_table, format_type):
         """Exporta ambas tablas al formato especificado"""
+        # CSV, Latex, Excel
         try:
             # Crear directorio 'export' si no existe
             export_dir = Path(__file__).parent.parent / "export"
