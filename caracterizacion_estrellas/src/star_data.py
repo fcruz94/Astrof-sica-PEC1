@@ -1,6 +1,7 @@
 
 import numpy as np
-# Estrellas estándar de la secuencia principal
+# Estrellas estándar para construir la secuencia principal
+# en el diagrama H-R
 STANDARD_STARS = [
     # (Tipo espectral, B-V, Mv)
     ('O5', -0.35, -5.8),
@@ -39,6 +40,7 @@ def calculate_absolute_magnitude(V, distance_pc):
 
 def calculate_tangential_velocity(proper_motion_arcsec_year, distance_pc):
     """Calcula la velocidad tangencial en km/s"""
+    # Sustituyo la ecuación 'corta' por el desarrollo completo
     proper_motion_rad_year = proper_motion_arcsec_year * (np.pi / (180 * 3600))
     distance_km = distance_pc * 3.086e13
     return proper_motion_rad_year * distance_km / (365.25 * 24 * 3600)
