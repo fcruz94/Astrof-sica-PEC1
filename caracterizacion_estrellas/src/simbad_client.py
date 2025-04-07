@@ -7,7 +7,9 @@ def configure_simbad():
     """Configuración para obtener todos los datos necesarios"""
     custom_simbad = Simbad()
     
-    # Campos específicos que sabemos que funcionan
+    # Campos específicos que necesitamos
+    # OJO: fluxB y fluxV están obsoletos en favor de B y V, respectivamente,
+    # para las magnitudes en B y V
     custom_simbad.add_votable_fields(
         'rvz_radvel',  # Velocidad radial en km/s
         'plx_value',   # Paralaje en miliarcosegundos
@@ -15,7 +17,7 @@ def configure_simbad():
         'V'      # Magnitud V
     )
     
-    # Ajustes adicionales para mejor recuperación de datos
+    # Ajustes adicionales para controlar la consulta
     custom_simbad.TIMEOUT = 60
     custom_simbad.ROW_LIMIT = 1
     return custom_simbad
@@ -34,7 +36,6 @@ def query_simbad(star_name):
             return None
         
         # Extracción de datos
-        # OJO: fluxB y fluxV están obsoletos en favor de B y V respectivamente
         data = {
             'name': star_name,
             'radial_velocity_km_s': _safe_extract(result, 'rvz_radvel'),
@@ -57,18 +58,18 @@ def query_simbad(star_name):
         return None
 
 def _safe_extract(result, field):
-    """Extrae un campo"""
+    """Extrae un campo si contiene información"""
     if field not in result.colnames:
         return None
     value = result[field][0]
     return float(value) if value is not np.ma.masked else None
 
 def _safe_extract_parallax(result):
-    """Extrae y convierte la paralaje de mas a arcsec"""
+    """Extrae y convierte la paralaje a arcsec"""
     if 'plx_value' not in result.colnames:
         return None
     value = result['plx_value'][0]
     if value is np.ma.masked:
         return None
-    return float(value) / 1000  # Convertir de mas a arcsec# -*- coding: utf-8 -*-
+    return float(value) / 1000  # Convertir a arcsec# -*- coding: utf-8 -*-
 
