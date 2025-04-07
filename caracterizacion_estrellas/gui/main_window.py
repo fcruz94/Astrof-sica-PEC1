@@ -15,15 +15,15 @@ class StarInputForm:
     def setup_ui(self):
         self.root.title("Caracterización de Estrellas - Entrada de Datos")
         
-        # Frame principal
+        # Ventana principal
         main_frame = ttk.Frame(self.root, padding="10")
         main_frame.pack(fill=tk.BOTH, expand=True)
         
-        # Frame de entrada
+        # Venatana de entrada
         input_frame = ttk.LabelFrame(main_frame, text="Datos de la Estrella", padding="10")
         input_frame.pack(fill=tk.X, pady=5)
         
-        # Grid configuration
+        # Configuración del grid
         input_frame.grid_columnconfigure(1, weight=1)
         
         # Campos del formulario
