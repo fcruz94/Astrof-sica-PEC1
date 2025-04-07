@@ -20,5 +20,3 @@ print(result['plx_value'][0])    # Paralaje en mas
 print(result['rvz_radvel'][0])   # Velocidad radial en km/s
 print(result['B'][0])            # Magnitud B
 print(result['V'][0])            # Magnitud V
-
-print(Simbad.list_columns("flux"))
