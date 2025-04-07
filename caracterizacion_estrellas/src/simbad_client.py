@@ -13,8 +13,8 @@ def configure_simbad():
     custom_simbad.add_votable_fields(
         'rvz_radvel',  # Velocidad radial en km/s
         'plx_value',   # Paralaje en miliarcosegundos
-        'B',     # Magnitud B
-        'V'      # Magnitud V
+        'B',           # Magnitud B
+        'V'            # Magnitud V
     )
     
     # Ajustes adicionales para controlar la consulta
