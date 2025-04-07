@@ -4,7 +4,7 @@ import warnings
 from astropy.utils.exceptions import AstropyWarning
 
 def configure_simbad():
-    """Configuración optimizada para obtener todos los datos necesarios"""
+    """Configuración para obtener todos los datos necesarios"""
     custom_simbad = Simbad()
     
     # Campos específicos que sabemos que funcionan
